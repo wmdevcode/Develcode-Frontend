@@ -6,7 +6,7 @@ import { storage } from '../firebase/Index'
 import axios from 'axios';
 
 
-
+// ESSE COMPONETE ENVIAR A FOTO PARAR O FIREBASE E ENVIA A URL DA FOTO PARA NOSSO BACK, GUARDANDO NO BANCO DE DADOS 
 class FotoUploader extends PureComponent {
     state = {
         src: null,

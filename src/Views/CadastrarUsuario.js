@@ -3,7 +3,8 @@ import axios from 'axios';
 import EditarFoto from './EditarFoto';
 
 class CadastrarUsuario extends React.Component {
-
+// VARIAVEIS QUE REGEM O SISTEMA
+// VARIAS DOS INPUTS E VARIAVEIS QUE REGEM O MODO DE EXIBIÇÃO DA RELA
     state = {
         inserir: '',
         codigo: '',
@@ -23,8 +24,8 @@ class CadastrarUsuario extends React.Component {
     componentDidMount() {
         this.consultarUsuariosAtuais()
     }
-
-    handleCodigo = (e) => {
+// TODAS AS FUNCOES DE CODIGO HANDLE FAZEM A MESMA COISA, FECHAR MODAL DE CODIGO DE ERRO, E ATRIBUI O VALOR DIGITADO A VARIAVEL
+    handleCodigo = (e) => { 
         this.fecharModal()
 
         //variaveis do tipo state para receber valor é daseguinte forma
@@ -32,7 +33,7 @@ class CadastrarUsuario extends React.Component {
             codigo: e.target.value
         })
     }
-
+// TODAS AS FUNCOES DE CODIGO HANDLE FAZEM A MESMA COISA, FECHAR MODAL DE CODIGO DE ERRO, E ATRIBUI O VALOR DIGITADO A VARIAVEL
     handleNome = (e) => {
         //fazer a modalzinha sumir
         this.fecharModal()
@@ -71,7 +72,7 @@ class CadastrarUsuario extends React.Component {
 
             })
     }
-
+// ESSA FUNÇÃO VALIDA SE OS DADOS ESTÃO PREENCHIDOS E ENVIA A INFORMAÇÃO PARA O BACK-END USANDO AXIOS.PUT QUE É O METODO DE ATUALIZAÇÃO
     atualizarUsuario = () => {
 
         if (this.state.codigo == '') {
@@ -122,7 +123,7 @@ class CadastrarUsuario extends React.Component {
                 })
         }
     }
-
+// DEPENDENDO DO MODO DE EDIÇÃO, CASO SEJA TRUE, ELE ENVIAR PARA A FUNÇÃO ATUALIZAR USUARIO OU PARA CADASTRAR USUARIO
     atualizeOuCadastre = () => {
         if (this.state.modoEdicao == true) {
             this.atualizarUsuario()
@@ -130,6 +131,7 @@ class CadastrarUsuario extends React.Component {
             this.cadastrarUser()
         }
     }
+    // ESSA FUNÇÃO VALIDA SE OS DADOS ESTÃO PREENCHIDOS E ENVIA A INFORMAÇÃO PARA O BACK-END USANDO AXIOS
     cadastrarUser = () => {
 
         if (this.state.codigo == '') {
@@ -192,6 +194,7 @@ class CadastrarUsuario extends React.Component {
         })
 
     }
+// TODAS AS FUNCOES DE CODIGO HANDLE FAZEM A MESMA COISA, FECHAR MODAL DE CODIGO DE ERRO, E ATRIBUI O VALOR DIGITADO A VARIAVEL
 
     handleDataNascimento = (e) => {
         console.log('input do e', e.target.value)
@@ -217,7 +220,7 @@ class CadastrarUsuario extends React.Component {
         })
 
     }
-
+// ELE CHAMA O BACK-END PARA DELETAR ESSE ID
     deletarSkill = (id) => {
 
         axios.delete(`http://localhost:8081/comites/${id}`)
@@ -239,7 +242,7 @@ class CadastrarUsuario extends React.Component {
 
             })
     }
-
+// A PARTIR AQUI É O QUE APARECE NA TELA HTML, TABELAS, BOTÕES, COR...
     render() {
         return (
 
@@ -260,6 +263,7 @@ class CadastrarUsuario extends React.Component {
 
                         <div className="login-desktop sombra text-center ">
                             <div>
+                                {/* AQUI ESTÃO OS INPUTS. TODA VEZ QUE O INPUT É ALTERADO ELES EXECUTAM A FUNÇÃO "ONCHANGE" QUE CHAMA O "HANDLECODIGO" */}
                                 <label htmlFor="exampleInputEmail1">Código do Usuário</label>
 
                                 <input value={this.state.codigo} onChange={(e) => { this.handleCodigo(e) }} type="number" className="form-control" placeholder="Código" /><p></p>
@@ -275,7 +279,7 @@ class CadastrarUsuario extends React.Component {
                             <br></br>
                             {/* if no react  tem um formato diferente quando tratamos dentro do html:*/}
 
-
+{/* AO CLICAR NO BOTÃO SERA SOLICITADA A FUNÇÃO QUE A REALIZA O CADASTRO E ENVIA OS DADOS AO BACK-END OU ATUALIZAÇÃO */}
                             <div>
                                 <button onClick={this.atualizeOuCadastre} type="button" class="btn btn-primary"> {this.state.modoEdicao == true ? "Atualizar o Usuário" : "Inserir Usuário"}</button><p></p>
                             </div>
@@ -306,6 +310,7 @@ class CadastrarUsuario extends React.Component {
 
                                     </thead>
                                     <div>
+                                    {/* AQUI APARECE A TABELA */}
                                         <table className="table table-hover">
                                             <tr>
                                                 <td>Foto</td>
@@ -318,6 +323,7 @@ class CadastrarUsuario extends React.Component {
 
                                                 <td>Excluir</td>
                                             </tr>
+                                            {/* AQUI É ONDE PERCORREMOS AS LISTAS DE USUARIOS E COLOCAMOS NA TELA. PORQUE EM REACT O .MAP É O "FOR" */}
                                             {this.state.listaUsuarios.map(user => (
 
                                                 <tr>
